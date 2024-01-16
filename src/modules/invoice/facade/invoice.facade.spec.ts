@@ -56,7 +56,8 @@ describe("Invoice Facade test", () => {
                     name: "item 2",
                     price: 20
                 }
-            ]
+            ],
+            total: 30
         };
 
         const output = await facedeFactory.generate(input);
