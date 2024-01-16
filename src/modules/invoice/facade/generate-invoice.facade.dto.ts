@@ -12,6 +12,7 @@ export interface GenerateInvoiceFacadeInputDto {
         name: string;
         price: number;
     }[];
+    total: number;
 }
 
 export interface GenerateInvoiceFacadeOutputDto {
