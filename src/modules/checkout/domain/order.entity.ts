@@ -1,25 +1,25 @@
 import BaseEntity from "../../@shared/domain/entity/base.entity";
 import Id from "../../@shared/domain/value-object/id.value-object"
 import Client from "./client.entity";
-import Product from "./product.entity";
+import OrderItem from "./order-item.entity";
 
 type OrderProps = {
     id?: Id;
     client: Client;
-    products: Product[];
+    items: OrderItem[];
     status?: string;
 }
 
 export default class Order extends BaseEntity {
 
     private _client: Client;
-    private _products: Product[];
+    private _items: OrderItem[];
     private _status: string;
 
     constructor(props: OrderProps) {
         super(props.id);
         this._client = props.client;
-        this._products = props.products;
+        this._items = props.items;
         this._status = props.status || "pending";
     }
 
@@ -31,8 +31,8 @@ export default class Order extends BaseEntity {
         return this._client;
     }
 
-    get products(): Product[] {
-        return this._products;
+    get items(): OrderItem[] {
+        return this._items;
     }
 
     get status(): string {
@@ -40,6 +40,6 @@ export default class Order extends BaseEntity {
     }
 
     get total(): number {
-        return this._products.reduce((total, product) => total + product.salesPrice, 0);
+        return this.items.reduce((total, item) => total + item.salesPrice, 0);
     }
 }

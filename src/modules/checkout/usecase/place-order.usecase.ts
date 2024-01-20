@@ -4,12 +4,13 @@ import ClientAdmFacadeInterface from "../../client-adm/facade/client-adm.facade.
 import ProductAdmFacadeInterface from "../../product-adm/facade/product-adm.facade.interface";
 import StoreCatalogFacadeInterface from "../../store-catalog/facade/store-catalog.facade.interface";
 import Order from "../domain/order.entity";
-import Product from "../domain/product.entity";
 import { PlaceOrderInputDto, PlaceOrderOutputDto } from "./place-order.dto";
 import CheckoutGateway from '../gateway/checkout.gateway';
 import { InvoiceFacadeInterface } from "../../invoice/facade/invoice.facade.interface";
 import PaymentFacadeInterface from "../../payment/facade/facade.interface";
 import Client from "../domain/client.entity";
+import Product from "../domain/product.entity";
+import OrderItem from "../domain/order-item.entity";
 
 export default class PlaceOrderUseCase implements UseCaseInterface {
     
@@ -59,10 +60,17 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
 
         const order = new Order({
             client: myClient,
-            products: products
+            items: products.map((p) => {
+                return new OrderItem({
+                    id: new Id(p.id.id),
+                    name: p.name,
+                    description: p.description,
+                    salesPrice: p.salesPrice
+                })
+            })
         });
 
-        const orderResult = await this._repository.addOrder(order);
+        await this._repository.addOrder(order);
 
         const payment = await this._paymentFacade.process({
             orderId: order.id.id,
@@ -96,7 +104,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
             invoiceId: payment.status === "approved" ? invoice.id : null,
             status: order.status,
             total: order.total,
-            products: order.products.map((p) => {
+            products: order.items.map((p) => {
                 return {
                     productId: p.id.id
                 }

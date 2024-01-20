@@ -267,7 +267,6 @@ describe("Place Order use case unit test", () => {
             .spyOn(placeOrderUseCse, "getProduct")
             //@ts-expect-error - not return never
             .mockImplementation((productId: keyof typeof products) => {
-                console.log('kkkkkkk', productId)
                 return products[productId];
             });
         
