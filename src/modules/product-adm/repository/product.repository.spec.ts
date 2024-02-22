@@ -30,6 +30,8 @@ describe("ProductRepository test", () => {
       description: "Product 1 description",
       purchasePrice: 100,
       stock: 10,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
     const product = new Product(productProps);
     const productRepository = new ProductRepository();

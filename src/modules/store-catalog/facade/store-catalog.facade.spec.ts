@@ -28,6 +28,7 @@ describe("StoreCatalogFacade test", () => {
       name: "Product 1",
       description: "Description 1",
       salesPrice: 100,
+      stock: 10,
     });
 
     const result = await facade.find({ id: "1" });
@@ -45,12 +46,14 @@ describe("StoreCatalogFacade test", () => {
       name: "Product 1",
       description: "Description 1",
       salesPrice: 100,
+      stock: 10,
     });
     await ProductModel.create({
       id: "2",
       name: "Product 2",
       description: "Description 2",
       salesPrice: 200,
+      stock: 30,
     });
 
     const result = await facade.findAll();

@@ -20,10 +20,4 @@ export class ProductModel extends Model {
 
   @Column({ allowNull: false })
   stock: number;
-
-  @Column({ allowNull: false })
-  createdAt: Date;
-
-  @Column({ allowNull: false })
-  updatedAt: Date;
 }

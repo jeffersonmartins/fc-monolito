@@ -1,7 +1,7 @@
 import { Column, ForeignKey, Model, PrimaryKey, Table } from "sequelize-typescript";
 import OrderModel from "./order.model";
 
-@Table({ tableName: "clients", timestamps: false })
+@Table({ tableName: "clients-checkout", timestamps: false })
 export default class ClientModel extends Model {
     @PrimaryKey
     @Column({ allowNull: false })

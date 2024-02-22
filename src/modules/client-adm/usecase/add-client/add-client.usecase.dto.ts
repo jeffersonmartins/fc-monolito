@@ -6,7 +6,7 @@ export interface AddClientInputDto {
   name: string
   email: string
   document: string
-  address: Address
+  address: {street: string, number: string, complement: string, city: string, state: string, zipCode: string}
 }
 
 export interface AddClientOutputDto {
@@ -14,7 +14,7 @@ export interface AddClientOutputDto {
   name: string
   email: string
   document: string
-  address: Address
+  address: {street: string, number: string, complement: string, city: string, state: string, zipCode: string}
   createdAt: Date
   updatedAt: Date
 }

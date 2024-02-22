@@ -7,6 +7,7 @@ const product = new Product({
   name: "Product 1",
   description: "Description 1",
   salesPrice: 100,
+  stock: 10,
 });
 
 const product2 = new Product({
@@ -14,6 +15,7 @@ const product2 = new Product({
   name: "Product 2",
   description: "Description 2",
   salesPrice: 200,
+  stock: 0,
 });
 
 const MockRepository = () => {
